@@ -1,0 +1,28 @@
+{
+    "name": "NFL Data Analysis Environment",
+    "image": "mcr.microsoft.com/devcontainers/python:3.12",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.pylint", 
+                "ms-toolsai.jupyter",
+                "ms-python.black-formatter",
+                "ms-python.isort"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.terminal.activateEnvironment": true
+            }
+        }
+    },
+    "postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt && echo '🏈 NFL Analysis Environment Ready!' && python session_manager.py",
+    "forwardPorts": [8000, 8080, 5000, 8888],
+    "remoteUser": "vscode",
+    "mounts": [
+        "source=${localWorkspaceFolder}/.nfl_data_cache,target=/workspaces/${localWorkspaceFolderBasename}/.nfl_data_cache,type=bind,consistency=cached"
+    ]
+}
